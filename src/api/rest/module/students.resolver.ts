@@ -1,18 +1,17 @@
 import { Application } from "express";
-import { StudentsUseCase } from "../../../domain/students";
-import { Service } from "typedi";
+import { GetStudentsUseCase } from "../../../domain/students";
 
 export class StudentsResolvers {
-  private readonly studentsUseCase: StudentsUseCase;
+  private readonly getStudentsUseCase: GetStudentsUseCase;
 
   constructor(private app: Application) {
-    this.studentsUseCase = new StudentsUseCase();
+    this.getStudentsUseCase = new GetStudentsUseCase();
     this.initializeRoutes();
   }
 
   private initializeRoutes() {
-    this.app.get("/students", (req, res) => {
-      res.json(this.studentsUseCase.getStudents());
+    this.app.get("/students", async (req, res) => {
+      res.json(await this.getStudentsUseCase.exec());
     });
   }
 }

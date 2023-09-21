@@ -1,12 +1,12 @@
+import { Repository } from "typeorm";
+import { StudentEntity } from "../db/entity";
+import AppDataSource from "../../api/config/data-source.config";
+
 export class StudentsDataSource {
-  students = [
-    { id: 1, name: "Mariazinha" },
-    { id: 2, name: "Joãozinho" },
-    { id: 3, name: "Pedrinho" },
-  ];
-  constructor() {}
+  private readonly repository: Repository<StudentEntity> =
+    AppDataSource.getRepository(StudentEntity);
 
   getStudents() {
-    return this.students;
+    return this.repository.find();
   }
 }

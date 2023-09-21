@@ -1,1 +1,1 @@
-export * from "./students.use-case";
+export * from "./get-students.use-case";
