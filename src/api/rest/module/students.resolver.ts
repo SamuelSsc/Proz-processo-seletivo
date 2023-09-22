@@ -41,14 +41,12 @@ export class StudentsResolvers {
     this.app.put("/update-user/:userId", async (req, res) => {
       const userId = req.params.userId;
       const userData = req.body;
-
       try {
         const updatedUser = await this.updateStudentUseCase.exec(
           {
             ...userData,
-            //Isso aqui abaixo acaba deixando a pessoa mandar qualquer coisa, setar o que pode ser enviado
-            maritalStatus: userData.maritalStatus as MaritalStatusType,
-            sex: userData.sex as SexType,
+            maritalStatus: userData.maritalStatus,
+            sex: userData.sex,
           },
           userId
         );

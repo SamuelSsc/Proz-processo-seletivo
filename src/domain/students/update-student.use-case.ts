@@ -1,5 +1,9 @@
 import { StudentsDataSource } from "../../data/students/students.db.datasource";
-import { UpdateUserInputModel } from "../model";
+import {
+  UpdateUserInputModel,
+  maritalStatusMapping,
+  sexMapping,
+} from "../model";
 
 export class UpdateStudentUseCase {
   private readonly datasource: StudentsDataSource;
@@ -9,13 +13,28 @@ export class UpdateStudentUseCase {
 
   async exec(input: UpdateUserInputModel, userId: string) {
     const user = await this.datasource.findById(userId);
-
-    if (!user) {
+    if (!user.length) {
       throw new Error("Estudante não encontrado");
     }
 
-    //Lançar erro se input for invalido type
+    if (
+      !!input.maritalStatus &&
+      maritalStatusMapping[input.maritalStatus] === undefined
+    ) {
+      throw new Error(`Valor de estado civil inválido: ${input.maritalStatus}`);
+    }
 
-    return await this.datasource.updateStudent({ ...input, id: userId });
+    if (!!input.sex && sexMapping[input.sex] === undefined) {
+      throw new Error(`Valor de sexo inválido: ${input.sex}`);
+    }
+
+    return await this.datasource.updateStudent({
+      ...input,
+      id: userId,
+      maritalStatus: input.maritalStatus
+        ? maritalStatusMapping[input.maritalStatus]
+        : undefined,
+      sex: input.sex ? sexMapping[input.sex] : undefined,
+    });
   }
 }
