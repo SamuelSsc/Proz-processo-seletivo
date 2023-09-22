@@ -1,6 +1,7 @@
 import { Repository } from "typeorm";
 import { StudentEntity } from "../db/entity";
 import AppDataSource from "../../api/config/data-source.config";
+import { StudentModel } from "../../domain/model";
 
 export class StudentsDataSource {
   private readonly repository: Repository<StudentEntity> =
@@ -8,5 +9,9 @@ export class StudentsDataSource {
 
   getStudents() {
     return this.repository.find();
+  }
+
+  insertStudents(input: StudentModel[]) {
+    return this.repository.insert(input);
   }
 }

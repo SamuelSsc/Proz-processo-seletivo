@@ -1,8 +1,12 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { MaritalStatusType, SexType } from "../../../domain/model";
+import { Column, Entity, PrimaryGeneratedColumn, Unique } from "typeorm";
+import {
+  MaritalStatusType,
+  SexType,
+  StudentModel,
+} from "../../../domain/model";
 
 @Entity("student")
-export class StudentEntity {
+export class StudentEntity implements StudentModel {
   @PrimaryGeneratedColumn()
   id: number;
 
