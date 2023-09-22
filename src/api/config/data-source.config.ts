@@ -1,5 +1,7 @@
 import { DataSource } from "typeorm";
 import * as dotenv from "dotenv";
+import "reflect-metadata";
+import { StudentEntity } from "../../data/db/entity";
 
 const isTest = process.env.TEST;
 isTest
@@ -12,7 +14,7 @@ const AppDataSource = new DataSource({
   url: process.env.DB_BASE_URL,
   synchronize: true,
   logging: true,
-  entities: [], // Adicione todas as suas entidades aqui
+  entities: [StudentEntity],
   migrations: [],
   subscribers: [],
 });
