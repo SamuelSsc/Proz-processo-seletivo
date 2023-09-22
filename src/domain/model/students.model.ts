@@ -16,3 +16,10 @@ export interface StudentModel {
   birthDate: Date;
   sex: SexType;
 }
+
+export interface UpdateUserInputModel {
+  name?: string;
+  maritalStatus?: MaritalStatusType;
+  email?: string;
+  sex?: SexType;
+}

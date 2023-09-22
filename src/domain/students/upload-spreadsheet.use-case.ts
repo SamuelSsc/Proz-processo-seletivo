@@ -1,8 +1,6 @@
-import { createReadStream } from "fs";
 import { StudentsDataSource } from "../../data/students/students.db.datasource";
-import { readFile } from "fs/promises";
 import { GetStudentsFromSpreadsheetDto } from "../dto/students.dto";
-import { format, parse } from "date-fns";
+import { parse } from "date-fns";
 
 export class UploadSpreadsheetUseCase {
   private readonly datasource: StudentsDataSource;
