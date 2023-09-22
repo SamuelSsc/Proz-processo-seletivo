@@ -5,18 +5,20 @@ import {
   GetStudentsUseCase,
   UploadSpreadsheetUseCase,
   UpdateStudentUseCase,
+  DeleteStudentUseCase,
 } from "../../../domain/students";
-import { MaritalStatusType, SexType } from "../../../domain/model";
 
 export class StudentsResolvers {
   private readonly getStudentsUseCase: GetStudentsUseCase;
   private readonly uploadSpreadsheetUseCase: UploadSpreadsheetUseCase;
   private readonly updateStudentUseCase: UpdateStudentUseCase;
+  private readonly deleteStudentUseCase: DeleteStudentUseCase;
 
   constructor(private app: Application) {
     this.getStudentsUseCase = new GetStudentsUseCase();
     this.uploadSpreadsheetUseCase = new UploadSpreadsheetUseCase();
     this.updateStudentUseCase = new UpdateStudentUseCase();
+    this.deleteStudentUseCase = new DeleteStudentUseCase();
     this.initializeRoutes();
   }
 
@@ -38,7 +40,7 @@ export class StudentsResolvers {
       }
     });
 
-    this.app.put("/update-user/:userId", async (req, res) => {
+    this.app.put("/update-student/:userId", async (req, res) => {
       const userId = req.params.userId;
       const userData = req.body;
       try {
@@ -55,6 +57,16 @@ export class StudentsResolvers {
           message: "Usuário atualizado com sucesso",
           user: updatedUser,
         });
+      } catch (error: any) {
+        res.status(400).json({ error: error.message });
+      }
+    });
+
+    this.app.delete("/delete-student/:userId", async (req, res) => {
+      const userId = req.params.userId;
+
+      try {
+        res.json(await this.deleteStudentUseCase.exec(userId));
       } catch (error: any) {
         res.status(400).json({ error: error.message });
       }

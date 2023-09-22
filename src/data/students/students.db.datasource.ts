@@ -28,12 +28,16 @@ export class StudentsDataSource {
   }
 
   async updateStudent(input: UpdateStudentsParams) {
-    const response = await this.repository.update(input.id, {
+    await this.repository.update(input.id, {
       name: input.name,
       maritalStatus: input.maritalStatus,
       email: input.email,
       sex: input.sex,
     });
     return this.repository.findOneOrFail({ where: { id: +input.id } });
+  }
+
+  deleteStudent(userId: string) {
+    return this.repository.delete({ id: +userId });
   }
 }
