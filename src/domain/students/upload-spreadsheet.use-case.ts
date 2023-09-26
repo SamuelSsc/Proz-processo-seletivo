@@ -1,8 +1,7 @@
-import { createReadStream } from "fs";
 import { StudentsDataSource } from "../../data/students/students.db.datasource";
-import { readFile } from "fs/promises";
 import { GetStudentsFromSpreadsheetDto } from "../dto/students.dto";
-import { format, parse } from "date-fns";
+import { parse } from "date-fns";
+import { maritalStatusMapping, sexMapping } from "../model";
 
 export class UploadSpreadsheetUseCase {
   private readonly datasource: StudentsDataSource;
@@ -50,14 +49,24 @@ export class UploadSpreadsheetUseCase {
         dateParts[1].length === 1 ? `0${dateParts[1]}` : dateParts[1];
       const formattedDate = `${formattedDay}-${formattedMonth}-${dateParts[2]}`;
 
+      if (maritalStatusMapping[student["Estado Civil"]] === undefined) {
+        throw new Error(
+          `Valor de estado civil inválido: ${student["Estado Civil"]}`
+        );
+      }
+
+      if (sexMapping[student.Sexo] === undefined) {
+        throw new Error(`Valor de sexo inválido: ${student.Sexo}`);
+      }
+
       return {
         name: student["Nome do Aluno"],
-        maritalStatus: student["Estado Civil"],
+        maritalStatus: maritalStatusMapping[student["Estado Civil"]],
         email: student.Email,
         cpf: student.CPF,
         rg: student.RG,
         birthDate: parse(formattedDate, "dd-MM-yyyy", new Date()),
-        sex: student.Sexo,
+        sex: sexMapping[student.Sexo],
       };
     });
 

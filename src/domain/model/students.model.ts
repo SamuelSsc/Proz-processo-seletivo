@@ -1,11 +1,16 @@
-export type MaritalStatusType =
-  | "SOLTEIRO(A)"
-  | "CASADO(A)"
-  | "SEPARADO(A)"
-  | "DIVORCIADO(A)"
-  | "VIÚVO(A)";
+export enum MaritalStatusType {
+  single = "SOLTEIRO",
+  married = "CASADO",
+  Separate = "SEPARADO",
+  divorced = "DIVORCIADO",
+  widower = "VIUVO",
+}
 
-export type SexType = "Masculino" | "Feminino" | "Não binário";
+export enum SexType {
+  male = "Masculino",
+  female = "Feminino",
+  other = "Não binário",
+}
 
 export interface StudentModel {
   name: string;
@@ -15,4 +20,11 @@ export interface StudentModel {
   rg: string;
   birthDate: Date;
   sex: SexType;
+}
+
+export interface UpdateUserInputModel {
+  name?: string;
+  maritalStatus?: string;
+  email?: string;
+  sex?: string;
 }

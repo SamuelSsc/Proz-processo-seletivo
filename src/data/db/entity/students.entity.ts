@@ -13,7 +13,7 @@ export class StudentEntity implements StudentModel {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ type: "enum", enum: MaritalStatusType })
   maritalStatus: MaritalStatusType;
 
   @Column({ unique: true })
@@ -28,6 +28,6 @@ export class StudentEntity implements StudentModel {
   @Column()
   birthDate: Date;
 
-  @Column()
+  @Column({ type: "enum", enum: SexType })
   sex: SexType;
 }
