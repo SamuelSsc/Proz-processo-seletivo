@@ -40,8 +40,8 @@ export class StudentsResolvers {
       }
     });
 
-    this.app.put("/update-student/:userId", async (req, res) => {
-      const userId = req.params.userId;
+    this.app.put("/update-student/:id", async (req, res) => {
+      const userId = req.params.id;
       const userData = req.body;
       try {
         const updatedUser = await this.updateStudentUseCase.exec(
@@ -62,8 +62,8 @@ export class StudentsResolvers {
       }
     });
 
-    this.app.delete("/delete-student/:userId", async (req, res) => {
-      const userId = req.params.userId;
+    this.app.delete("/delete-student/:id", async (req, res) => {
+      const userId = req.params.id;
 
       try {
         res.json(await this.deleteStudentUseCase.exec(userId));
