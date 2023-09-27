@@ -26,4 +26,10 @@ export async function createConnection() {
   console.log("Conected...!");
 }
 
+export const dataSource = AppDataSource.manager;
+
+export async function ClearDb() {
+  await dataSource.query('TRUNCATE TABLE "student" RESTART IDENTITY CASCADE');
+}
+
 export default AppDataSource;
