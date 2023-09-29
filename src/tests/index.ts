@@ -13,3 +13,4 @@ after(async () => {
 
 require("./get-students.test");
 require("./upload.spreadsheet.test");
+require("./delete-students.test");

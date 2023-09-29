@@ -25,4 +25,6 @@ export const CreateStudent = async () => {
   student.sex = defaultStudent.sex;
 
   await dataSource.save(student);
+
+  return student;
 };
