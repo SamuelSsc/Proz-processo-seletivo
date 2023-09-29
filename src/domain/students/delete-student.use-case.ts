@@ -6,14 +6,14 @@ export class DeleteStudentUseCase {
     this.datasource = new StudentsDataSource();
   }
 
-  async exec(userId: string) {
-    const user = await this.datasource.findById(userId);
+  async exec(studentId: string) {
+    const student = await this.datasource.findById(studentId);
 
-    if (!user.length) {
+    if (!student.length) {
       throw new Error("Estudante não encontrado");
     }
 
-    await this.datasource.deleteStudent(userId);
+    await this.datasource.deleteStudent(studentId);
     return { data: "Estudante deletado" };
   }
 }

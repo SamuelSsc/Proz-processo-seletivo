@@ -13,7 +13,7 @@ describe("Rest - StudentsResolver - getStudents", async () => {
     await ClearDb();
   });
 
-  it.only("shoul return user success", async () => {
+  it("shoul return student success", async () => {
     await CreateStudent();
 
     const response = await axios.get(url);

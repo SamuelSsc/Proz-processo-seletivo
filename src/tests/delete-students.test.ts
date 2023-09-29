@@ -17,13 +17,13 @@ describe("Rest - StudentsResolver - deleteStudents", async () => {
     const student = await CreateStudent();
 
     const response = await axios.delete(`${url}/${student.id}`);
-    const userDb = await dataSource.findOneBy(StudentEntity, {
+    const studentDb = await dataSource.findOneBy(StudentEntity, {
       id: student.id,
     });
 
     expect(response.data).to.be.deep.eq(expectResponse);
     expect(response.status).to.be.eq(200);
-    expect(userDb).is.null;
+    expect(studentDb).is.null;
   });
 
   it("should return student not found", async () => {

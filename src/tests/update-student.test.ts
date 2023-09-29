@@ -24,18 +24,18 @@ describe("Rest - StudentsResolver - updateStudents", async () => {
       maritalStatus: MaritalStatusType.married,
     });
 
-    const userDb = await dataSource.findOneBy(StudentEntity, {
+    const studentDb = await dataSource.findOneBy(StudentEntity, {
       id: student.id,
     });
-    userDb?.birthDate;
+    studentDb?.birthDate;
     const responseFormated = {
-      ...response.data.user,
-      birthDate: new Date(response.data.user.birthDate),
+      ...response.data.student,
+      birthDate: new Date(response.data.student.birthDate),
     };
 
     expect(response.data.message).to.be.deep.eq(expectResponse);
     expect(response.status).to.be.eq(200);
-    expect(responseFormated).to.be.deep.eq(userDb);
+    expect(responseFormated).to.be.deep.eq(studentDb);
   });
 
   it("should return student not found", async () => {

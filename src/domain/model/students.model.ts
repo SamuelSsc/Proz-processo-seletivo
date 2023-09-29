@@ -22,7 +22,7 @@ export interface StudentModel {
   sex: SexType;
 }
 
-export interface UpdateUserInputModel {
+export interface UpdateStudentInputModel {
   name?: string;
   maritalStatus?: string;
   email?: string;
