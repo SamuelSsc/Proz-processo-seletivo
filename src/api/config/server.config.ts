@@ -2,23 +2,25 @@ import express, { Express } from "express";
 import { StudentsResolvers } from "../rest/module/students.resolver";
 import bodyParser from "body-parser";
 import http from "http";
+import { promises } from "dns";
 
 let app: Express;
 let server: http.Server;
 
-export const setupServer = () => {
-  app = express();
-  const port = 3000;
-  app.use(bodyParser.json());
+export const setupServer = (): Promise<Express> => {
+  return new Promise((resolve) => {
+    app = express();
+    const port = 3000;
+    app.use(bodyParser.json());
 
-  new StudentsResolvers(app);
+    new StudentsResolvers(app);
 
-  server = http.createServer(app);
+    server = http.createServer(app);
 
-  //Promisefy
-  //Como transformar call back em promisse.
-  server.listen(port, () => {
-    console.log(`Servidor executando na porta ${port}`);
+    server.listen(port, () => {
+      console.log(`Servidor executando na porta ${port}`);
+      resolve(app);
+    });
   });
 };
 
