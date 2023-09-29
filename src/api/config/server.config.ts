@@ -1,15 +1,31 @@
-import express from "express";
+import express, { Express } from "express";
 import { StudentsResolvers } from "../rest/module/students.resolver";
 import bodyParser from "body-parser";
+import http from "http";
 
-export function setupServer() {
-  const app = express();
+let app: Express;
+let server: http.Server;
+
+export const setupServer = () => {
+  app = express();
   const port = 3000;
   app.use(bodyParser.json());
 
   new StudentsResolvers(app);
 
-  app.listen(port, () => {
-    console.log(`Server executing on port ${port}`);
+  server = http.createServer(app);
+
+  //Promisefy
+  //Como transformar call back em promisse.
+  server.listen(port, () => {
+    console.log(`Servidor executando na porta ${port}`);
   });
+};
+
+export async function stopServer() {
+  if (server) {
+    server.close(() => {
+      console.log("Servidor encerrado");
+    });
+  }
 }

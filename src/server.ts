@@ -1,9 +1,7 @@
 import { createConnection } from "./api/config/data-source.config";
 import { setupServer } from "./api/config/server.config";
 
-async function setup() {
+export async function setup() {
   await createConnection();
-  setupServer();
+  await setupServer();
 }
-
-setup();

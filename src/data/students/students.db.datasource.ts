@@ -19,8 +19,8 @@ export class StudentsDataSource {
     return this.repository.find();
   }
 
-  findById(userId: string) {
-    return this.repository.findBy({ id: +userId });
+  findById(studentId: string) {
+    return this.repository.findBy({ id: +studentId });
   }
 
   insertStudents(input: StudentModel[]) {
@@ -37,7 +37,7 @@ export class StudentsDataSource {
     return this.repository.findOneOrFail({ where: { id: +input.id } });
   }
 
-  deleteStudent(userId: string) {
-    return this.repository.delete({ id: +userId });
+  deleteStudent(studentId: string) {
+    return this.repository.delete({ id: +studentId });
   }
 }

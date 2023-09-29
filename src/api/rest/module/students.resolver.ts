@@ -40,33 +40,34 @@ export class StudentsResolvers {
       }
     });
 
-    this.app.put("/update-student/:userId", async (req, res) => {
-      const userId = req.params.userId;
-      const userData = req.body;
+    this.app.put("/update-student/:id", async (req, res) => {
+      const studentId = req.params.id;
+      const studentData = req.body;
+
       try {
-        const updatedUser = await this.updateStudentUseCase.exec(
+        const updatedStudent = await this.updateStudentUseCase.exec(
           {
-            ...userData,
-            maritalStatus: userData.maritalStatus,
-            sex: userData.sex,
+            ...studentData,
+            maritalStatus: studentData.maritalStatus,
+            sex: studentData.sex,
           },
-          userId
+          studentId
         );
 
         res.status(200).json({
           message: "Usuário atualizado com sucesso",
-          user: updatedUser,
+          student: updatedStudent,
         });
       } catch (error: any) {
         res.status(400).json({ error: error.message });
       }
     });
 
-    this.app.delete("/delete-student/:userId", async (req, res) => {
-      const userId = req.params.userId;
+    this.app.delete("/delete-student/:id", async (req, res) => {
+      const studentId = req.params.id;
 
       try {
-        res.json(await this.deleteStudentUseCase.exec(userId));
+        res.json(await this.deleteStudentUseCase.exec(studentId));
       } catch (error: any) {
         res.status(400).json({ error: error.message });
       }

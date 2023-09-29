@@ -1,6 +1,6 @@
 import { StudentsDataSource } from "../../data/students/students.db.datasource";
 import {
-  UpdateUserInputModel,
+  UpdateStudentInputModel,
   maritalStatusMapping,
   sexMapping,
 } from "../model";
@@ -11,9 +11,9 @@ export class UpdateStudentUseCase {
     this.datasource = new StudentsDataSource();
   }
 
-  async exec(input: UpdateUserInputModel, userId: string) {
-    const user = await this.datasource.findById(userId);
-    if (!user.length) {
+  async exec(input: UpdateStudentInputModel, studentId: string) {
+    const student = await this.datasource.findById(studentId);
+    if (!student.length) {
       throw new Error("Estudante não encontrado");
     }
 
@@ -30,7 +30,7 @@ export class UpdateStudentUseCase {
 
     return await this.datasource.updateStudent({
       ...input,
-      id: userId,
+      id: studentId,
       maritalStatus: input.maritalStatus
         ? maritalStatusMapping[input.maritalStatus]
         : undefined,
