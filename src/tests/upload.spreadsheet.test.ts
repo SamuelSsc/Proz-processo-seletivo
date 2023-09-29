@@ -2,12 +2,13 @@ import axios, { AxiosError } from "axios";
 import { describe } from "mocha";
 import { expect } from "chai";
 import { CreateStudent, defaultStudent } from "./seeds/create-student";
-import { ClearDb } from "../api/config/data-source.config";
+import { ClearDb, dataSource } from "../api/config/data-source.config";
 import { parse } from "date-fns";
 import { createReadStream, readFile } from "fs";
 import path from "path";
 import { blob } from "stream/consumers";
 import FormData from "form-data";
+import { StudentEntity } from "../data/db/entity";
 
 describe("Rest - StudentsResolver - uploadSpreadsheet", async () => {
   const url = "http://localhost:3000/upload";
@@ -35,10 +36,11 @@ describe("Rest - StudentsResolver - uploadSpreadsheet", async () => {
         "Content-Type": "multipart/form-data",
       },
     });
+    const studentsDb = await dataSource.find(StudentEntity);
 
     expect(response.data).to.be.deep.eq(expectResponse);
     expect(response.status).to.be.eq(200);
-    //Verificar se os user estão no banco certinho
+    expect(studentsDb).is.not.null;
   });
 
   it("should return error invalid format of spreadsheet", async () => {

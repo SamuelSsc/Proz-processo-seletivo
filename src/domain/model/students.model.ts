@@ -1,9 +1,9 @@
 export enum MaritalStatusType {
-  single = "SOLTEIRO",
-  married = "CASADO",
-  Separate = "SEPARADO",
-  divorced = "DIVORCIADO",
-  widower = "VIUVO",
+  single = "SOLTEIRO(A)",
+  married = "CASADO(A)",
+  Separate = "SEPARADO(A)",
+  divorced = "DIVORCIADO(A)",
+  widower = "VIÚVO(A)",
 }
 
 export enum SexType {

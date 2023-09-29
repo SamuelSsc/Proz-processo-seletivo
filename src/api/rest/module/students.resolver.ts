@@ -43,6 +43,7 @@ export class StudentsResolvers {
     this.app.put("/update-student/:id", async (req, res) => {
       const userId = req.params.id;
       const userData = req.body;
+
       try {
         const updatedUser = await this.updateStudentUseCase.exec(
           {
@@ -64,8 +65,6 @@ export class StudentsResolvers {
 
     this.app.delete("/delete-student/:id", async (req, res) => {
       const userId = req.params.id;
-
-      console.log("O QUE ESTÁ CHEGANDOP AQUIIIIIII???????", userId);
 
       try {
         res.json(await this.deleteStudentUseCase.exec(userId));
