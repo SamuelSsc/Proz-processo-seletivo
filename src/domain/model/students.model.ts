@@ -4,6 +4,8 @@ export enum MaritalStatusType {
   Separate = "SEPARADO(A)",
   divorced = "DIVORCIADO(A)",
   widower = "VIÚVO(A)",
+  //Esses dados aqui deveriam ser salvos no banco em inglês.
+  //O mapeamento dos valores para (A) deveriam ser feitos no front, ou no minimo em dominio se fosse necessario retornar em pt-br
 }
 
 export enum SexType {

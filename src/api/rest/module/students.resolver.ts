@@ -27,6 +27,7 @@ export class StudentsResolvers {
       res.json(await this.getStudentsUseCase.exec());
     });
 
+    //Isso é em outra camada Service/Core
     const storage = multer.memoryStorage();
     const upload = multer({ storage: storage });
 
@@ -54,6 +55,7 @@ export class StudentsResolvers {
           studentId
         );
 
+        //Esse retorno não tem haver com o mapeamento da interface e deveria estar na camada de useCase
         res.status(200).json({
           message: "Usuário atualizado com sucesso",
           student: updatedStudent,
