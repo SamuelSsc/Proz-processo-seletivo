@@ -1,3 +1,5 @@
+//Analizar e talvez chamar essa camada aqui de repository
+
 import { Repository } from "typeorm";
 import { StudentEntity } from "../db/entity";
 import AppDataSource from "../../api/config/data-source.config";

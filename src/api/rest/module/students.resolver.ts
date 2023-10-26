@@ -1,3 +1,6 @@
+//Resolver é no graphql aqui deveria ser controller
+
+
 import { Application } from "express";
 import multer from "multer";
 
@@ -23,6 +26,7 @@ export class StudentsResolvers {
   }
 
   private initializeRoutes() {
+    //Seguir o padrão de rotas do REST >> todas deveriam ser o nome da entidade
     this.app.get("/students", async (_, res) => {
       res.json(await this.getStudentsUseCase.exec());
     });
